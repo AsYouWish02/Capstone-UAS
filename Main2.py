@@ -233,7 +233,8 @@ def main():
             # Evaluasi model
             y_pred = model.predict(X_test_scaled)
             accuracy = accuracy_score(y_test, y_pred)
-            st.write(f"Akurasi Model: **{accuracy:.4f}**")
+            accuracy_percen = accuracy * 100
+            st.write(f"Akurasi Model: **{accuracy_percen:.4f}**")
         
             # Form input untuk prediksi
             st.subheader("Form Input Prediksi")
