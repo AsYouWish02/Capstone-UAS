@@ -62,80 +62,80 @@ def main():
 
     # Halaman Analisis dan Evaluasi
     elif page == "Analisis dan Evaluasi":
-    st.header("Analisis dan Evaluasi")
-    uploaded_file = st.sidebar.file_uploader("Unggah file dataset (CSV)", type=["csv"])
-    if uploaded_file:
-        dataset = pd.read_csv(uploaded_file)
+        st.header("Analisis dan Evaluasi")
+        uploaded_file = st.sidebar.file_uploader("Unggah file dataset (CSV)", type=["csv"])
+        if uploaded_file:
+            dataset = pd.read_csv(uploaded_file)
 
-        # Preprocessing
-        st.subheader("Preprocessing Data")
-        st.write("Mengganti nilai yang hilang dengan mean...")
-        dataset = dataset.fillna(dataset.mean())
+            # Preprocessing
+            st.subheader("Preprocessing Data")
+            st.write("Mengganti nilai yang hilang dengan mean...")
+            dataset = dataset.fillna(dataset.mean())
 
-        # Fitur dan target
-        fitur = ['ph', 'Hardness', 'Solids', 'Chloramines', 'Sulfate', 'Conductivity','Organic_carbon', 'Trihalomethanes', 'Turbidity']
-        target = 'Potability'
+            # Fitur dan target
+            fitur = ['ph', 'Hardness', 'Solids', 'Chloramines', 'Sulfate', 'Conductivity','Organic_carbon', 'Trihalomethanes', 'Turbidity']
+            target = 'Potability'
 
-        X = dataset[fitur]
-        y = dataset[target]
+            X = dataset[fitur]
+            y = dataset[target]
 
-        # Split data
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+            # Split data
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        # Normalisasi
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
+            # Normalisasi
+            scaler = StandardScaler()
+            X_train_scaled = scaler.fit_transform(X_train)
+            X_test_scaled = scaler.transform(X_test)
 
-        # Pemilihan algoritma
-        st.subheader("Pilih Algoritma")
-        algorithms = {
-            'Logistic Regression': LogisticRegression(max_iter=1000),
-            'Random Forest': RandomForestClassifier(),
-            'SVM': SVC(),
-            'KNN': KNeighborsClassifier(),
-            'Decision Tree': DecisionTreeClassifier()
-        }
-        selected_algo = st.selectbox("Pilih Algoritma", list(algorithms.keys()))
-        model = algorithms[selected_algo]
+            # Pemilihan algoritma
+            st.subheader("Pilih Algoritma")
+            algorithms = {
+                'Logistic Regression': LogisticRegression(max_iter=1000),
+                'Random Forest': RandomForestClassifier(),
+                'SVM': SVC(),
+                'KNN': KNeighborsClassifier(),
+                'Decision Tree': DecisionTreeClassifier()
+            }
+            selected_algo = st.selectbox("Pilih Algoritma", list(algorithms.keys()))
+            model = algorithms[selected_algo]
 
-        # Evaluasi sebelum normalisasi
-        st.subheader("Evaluasi Sebelum Normalisasi")
-        model.fit(X_train, y_train)
-        y_pred_before = model.predict(X_test)
-        accuracy_before = accuracy_score(y_test, y_pred_before)
-        cm_before = confusion_matrix(y_test, y_pred_before)
+            # Evaluasi sebelum normalisasi
+            st.subheader("Evaluasi Sebelum Normalisasi")
+            model.fit(X_train, y_train)
+            y_pred_before = model.predict(X_test)
+            accuracy_before = accuracy_score(y_test, y_pred_before)
+            cm_before = confusion_matrix(y_test, y_pred_before)
 
-        st.write(f"**Akurasi Sebelum Normalisasi: {accuracy_before:.4f}**")
-        st.write("**Confusion Matrix Sebelum Normalisasi:**")
-        st.write(cm_before)
+            st.write(f"**Akurasi Sebelum Normalisasi: {accuracy_before:.4f}**")
+            st.write("**Confusion Matrix Sebelum Normalisasi:**")
+            st.write(cm_before)
 
-        # Plot confusion matrix sebelum normalisasi
-        fig, ax = plt.subplots()
-        sns.heatmap(cm_before, annot=True, fmt='d', cmap='Blues', ax=ax)
-        ax.set_title(f"Confusion Matrix - {selected_algo} (Sebelum Normalisasi)")
-        ax.set_xlabel("Prediksi")
-        ax.set_ylabel("Aktual")
-        st.pyplot(fig)
+            # Plot confusion matrix sebelum normalisasi
+            fig, ax = plt.subplots()
+            sns.heatmap(cm_before, annot=True, fmt='d', cmap='Blues', ax=ax)
+            ax.set_title(f"Confusion Matrix - {selected_algo} (Sebelum Normalisasi)")
+            ax.set_xlabel("Prediksi")
+            ax.set_ylabel("Aktual")
+            st.pyplot(fig)
 
-        # Evaluasi setelah normalisasi
-        st.subheader("Evaluasi Setelah Normalisasi")
-        model.fit(X_train_scaled, y_train)
-        y_pred_after = model.predict(X_test_scaled)
-        accuracy_after = accuracy_score(y_test, y_pred_after)
-        cm_after = confusion_matrix(y_test, y_pred_after)
+            # Evaluasi setelah normalisasi
+            st.subheader("Evaluasi Setelah Normalisasi")
+            model.fit(X_train_scaled, y_train)
+            y_pred_after = model.predict(X_test_scaled)
+            accuracy_after = accuracy_score(y_test, y_pred_after)
+            cm_after = confusion_matrix(y_test, y_pred_after)
 
-        st.write(f"**Akurasi Setelah Normalisasi: {accuracy_after:.4f}**")
-        st.write("**Confusion Matrix Setelah Normalisasi:**")
-        st.write(cm_after)
+            st.write(f"**Akurasi Setelah Normalisasi: {accuracy_after:.4f}**")
+            st.write("**Confusion Matrix Setelah Normalisasi:**")
+            st.write(cm_after)
 
-        # Plot confusion matrix setelah normalisasi
-        fig, ax = plt.subplots()
-        sns.heatmap(cm_after, annot=True, fmt='d', cmap='Blues', ax=ax)
-        ax.set_title(f"Confusion Matrix - {selected_algo} (Setelah Normalisasi)")
-        ax.set_xlabel("Prediksi")
-        ax.set_ylabel("Aktual")
-        st.pyplot(fig)
+            # Plot confusion matrix setelah normalisasi
+            fig, ax = plt.subplots()
+            sns.heatmap(cm_after, annot=True, fmt='d', cmap='Blues', ax=ax)
+            ax.set_title(f"Confusion Matrix - {selected_algo} (Setelah Normalisasi)")
+            ax.set_xlabel("Prediksi")
+            ax.set_ylabel("Aktual")
+            st.pyplot(fig)
 
     # Halaman Prediksi Kelayakan Air
     elif page == "Prediksi Kelayakan Air":
