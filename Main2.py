@@ -43,6 +43,7 @@ def main():
         uploaded_file = st.sidebar.file_uploader("Unggah file dataset (CSV)", type=["csv"])
         if uploaded_file:
             dataset = pd.read_csv(uploaded_file)
+            dataset = dataset.fillna(dataset.mean())
 
             # Visualisasi distribusi Potability
             st.subheader("Distribusi Potability")
@@ -61,7 +62,7 @@ def main():
             st.pyplot(plt)
             
             #Visualisasi Histogram untuk setiap fitur
-            st.subheader("Distribusi Histogram untuk Setiap Fitur")
+            st.subheader("Distribusi Histogram Plot")
             features = dataset.columns[:-1]  # All columns except 'Potability'
         
             plt.figure(figsize=(15, 12))
