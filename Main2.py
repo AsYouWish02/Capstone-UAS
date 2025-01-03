@@ -59,6 +59,21 @@ def main():
             sns.heatmap(dataset.corr(), annot=True, cmap='coolwarm', fmt=".2f")
             plt.title("Korelasi Heatmap")
             st.pyplot(plt)
+            
+            #Visualisasi Histogram untuk setiap fitur
+            st.subheader("Distribusi Histogram untuk Setiap Fitur")
+            features = dataset.columns[:-1]  # All columns except 'Potability'
+        
+            plt.figure(figsize=(15, 12))
+            for i, feature in enumerate(features):
+                plt.subplot(3, 3, i + 1)  # Adjust the grid size based on number of features
+                sns.histplot(dataset[feature], kde=True, color='skyblue')
+                plt.title(f"Distribusi {feature}")
+                plt.xlabel(feature)
+                plt.ylabel("Frekuensi")
+        
+            plt.tight_layout()
+            st.pyplot(plt)
 
     # Halaman Analisis dan Evaluasi
     elif page == "Analisis dan Evaluasi":
