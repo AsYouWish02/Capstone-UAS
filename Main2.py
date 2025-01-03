@@ -33,7 +33,7 @@ def main():
             st.write(dataset.head())
 
             st.write("### Informasi Dataset")
-            st.write(dataset.dtypes())
+            st.write(dataset.dtypes)
 
             st.write("### Nilai Missing")
             st.write(dataset.isnull().sum())
