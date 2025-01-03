@@ -33,12 +33,11 @@ def main():
             st.write(dataset.head())
 
             st.write("### Informasi Dataset")
-            st.write("# Nilai Unik per Kolom")
-            for col in dataset.columns:
-                st.write(f"**{col}:** {dataset[col].unique()}")
-            st.write("# Jumlah Baris")
+            st.write("#### Nilai Unik per Kolom")
+            st.write(dataset.nunique())
+            st.write("#### Jumlah Baris")
             st.write(f"Jumlah Baris: {dataset.shape[0]}")
-            st.write("# Tipe Data")
+            st.write("#### Tipe Data")
             st.write(dataset.dtypes)
             
 
