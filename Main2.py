@@ -90,19 +90,15 @@ def main():
             st.pyplot(plt)
             
             #Visualisasi Histogram untuk setiap fitur
-            st.subheader("Distribusi Histogram Plot")
-            features = dataset.columns[:-1]  # All columns except 'Potability'
-        
-            plt.figure(figsize=(15, 12))
-            for i, feature in enumerate(features):
-                plt.subplot(3, 3, i + 1)  # Adjust the grid size based on number of features
-                sns.histplot(dataset[feature], kde=True, color='skyblue')
+            st.subheader("Distribusi Fitur dengan Histogram")
+            num_features = ['ph', 'Hardness', 'Solids', 'Chloramines', 'Sulfate', 'Conductivity', 'Organic_carbon', 'Trihalomethanes', 'Turbidity']
+            for feature in num_features:
+                plt.figure(figsize=(6, 4))
+                sns.histplot(data=dataset, x=feature, kde=True, bins=20)
                 plt.title(f"Distribusi {feature}")
                 plt.xlabel(feature)
                 plt.ylabel("Frekuensi")
-        
-            plt.tight_layout()
-            st.pyplot(plt)
+                st.pyplot(plt)
 
     # Halaman Analisis dan Evaluasi
     elif page == "Analisis dan Evaluasi":
