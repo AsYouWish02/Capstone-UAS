@@ -34,7 +34,7 @@ def main():
 
             st.write("### Informasi Dataset")
             st.write(dataset.dtypes)
-            st.write(dataset.describe())
+            st.write(dataset.unique()())
             
 
             st.write("### Nilai Missing")
