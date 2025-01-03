@@ -40,10 +40,6 @@ def main():
             st.write("#### Tipe Data")
             st.write(dataset.dtypes)
             
-
-            st.write("### Nilai Missing")
-            st.write(dataset.isnull().sum())
-
     # Halaman Visualisasi Data
     elif page == "Visualisasi Data":
         st.header("Visualisasi Data")
