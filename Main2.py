@@ -33,8 +33,9 @@ def main():
             st.write(dataset.head())
 
             st.write("### Informasi Dataset")
+            st.write(f"Jumlah Baris: {dataset.shape[0]}")
             st.write(dataset.dtypes)
-            st.write(dataset.unique()())
+            st.write(f"Jumlah Baris: {dataset.shape[0]}")
             
 
             st.write("### Nilai Missing")
