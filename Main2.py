@@ -196,18 +196,13 @@ def main():
         trihalomethanes = st.number_input("Trihalomethanes", min_value=0.0, step=0.01)
         turbidity = st.number_input("Turbidity", min_value=0.0, step=0.01)
 
-        # Memuat scaler dan model
-        try:
-            scaler = joblib.load('scaler.pkl')
-            model = joblib.load('model.pkl')
-        
         # Button prediksi
-            if st.button("Prediksi"):
-                input_data = [[ph, hardness, solids, chloramines, sulfate, conductivity,organic_carbon, trihalomethanes, turbidity]]
-                input_data_scaled = scaler.transform(input_data)  # Pastikan scaler diinisialisasi sebelumnya
-                prediction = model.predict(input_data_scaled)
-                result = "Layak Minum" if prediction[0] == 1 else "Tidak Layak Minum"
-                st.success(f"Hasil Prediksi: **{result}**")
+        if st.button("Prediksi"):
+            input_data = [[ph,hardness,solids,chloramines,sulfate, conductivity,organic_carbon, trihalomethanes, turbidity]]
+            input_data_scaled = scaler.transform(input_data)  # Pastikan scaler diinisialisasi sebelumnya
+            prediction = model.predict(input_data_scaled)
+            result = "Layak Minum" if prediction[0] == 1 else "Tidak Layak Minum"
+            st.success(f"Hasil Prediksi: **{result}**")
 
 if __name__ == "__main__":
     main()
