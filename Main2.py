@@ -13,8 +13,8 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 
 # Fungsi utama
 def main():
-    st.title("🌊 Water Potability Prediction")
-    st.write("Aplikasi ini membantu Anda menganalisis potabilitas air menggunakan algoritma klasifikasi.")
+    st.title("Water Potability Prediction")
+    st.write("Aplikasi menganalisis potabilitas air menggunakan algoritma klasifikasi.")
 
     # Sidebar
     st.sidebar.title("Navigasi")
