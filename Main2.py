@@ -49,7 +49,7 @@ def main():
             dataset = dataset.fillna(dataset.mean())
 
             # Visualisasi distribusi Potability
-           st.write("### Mengatasi Outliers")
+            st.write("### Mengatasi Outliers")
             for col in dataset.columns:
                 if dataset[col].dtype in ['int64', 'float64']:  # Hanya untuk kolom numerik
                     q1 = dataset[col].quantile(0.25)
