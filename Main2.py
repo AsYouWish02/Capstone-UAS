@@ -72,7 +72,7 @@ plt.show()
 stratified_sample = dataset.groupby('Potability', group_keys=False).apply(lambda x: x.sample(2, random_state=1).reset_index(drop=True))
 
 plt.figure(figsize=(6, 4))
-sns.countplot(data=random_sample, x='Potability')
+sns.countplot(data=stratified_sample, x='Potability')
 plt.title("Distribusi Data Setelah Resampling")
 plt.xlabel("Potability")
 plt.ylabel("Jumlah")
