@@ -32,7 +32,10 @@ def main():
             st.write(dataset.head())
 
             st.write("### Informasi Dataset")
-            st.write(dataset.info())
+            buffer = io.StringIO()  # Buffer to capture the output
+            dataset.info(buf=buffer)  # Capture the dataset info in the buffer
+            s = buffer.getvalue()  # Get the string from the buffer
+            st.text(s)  # Display the info as text in Streamlit
 
             st.write("### Nilai Missing")
             st.write(dataset.isnull().sum())
