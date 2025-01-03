@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import io
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
@@ -33,7 +32,7 @@ def main():
             st.write(dataset.head())
 
             st.write("### Informasi Dataset")
-            st.write("#### Nilai Unik per Kolom")
+            st.write("#### Nilai Unik")
             st.write(dataset.nunique())
             st.write("#### Jumlah Baris")
             st.write(f"Jumlah Baris: {dataset.shape[0]}")
@@ -234,7 +233,7 @@ def main():
             y_pred = model.predict(X_test_scaled)
             accuracy = accuracy_score(y_test, y_pred)
             accuracy_percen = accuracy * 100
-            st.write(f"Akurasi Model: **{accuracy_percen:.2f}%**")
+            st.write(f"Tingkat Akurasi Model: **{accuracy_percen:.2f}%**")
         
             # Form input untuk prediksi
             st.subheader("Form Input Prediksi")
