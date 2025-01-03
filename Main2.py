@@ -183,6 +183,7 @@ def main():
     # Halaman Prediksi Kelayakan Air
     elif page == "Prediksi Kelayakan Air":
         st.header("Prediksi Kelayakan Air")
+        model_choice = st.sidebar.selectbox("Pilih Model:",["Logistic Regression", "Random Forest", "SVM", "KNN", "Decision Tree"])
         st.write("Masukkan nilai dari 9 fitur untuk memprediksi apakah air layak diminum atau tidak.")
     
         # Upload dataset untuk pelatihan model
