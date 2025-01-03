@@ -34,6 +34,8 @@ def main():
 
             st.write("### Informasi Dataset")
             st.write(dataset.dtypes)
+            st.write(dataset.describe())
+            
 
             st.write("### Nilai Missing")
             st.write(dataset.isnull().sum())
