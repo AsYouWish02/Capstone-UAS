@@ -48,8 +48,7 @@ def main():
             dataset = pd.read_csv(uploaded_file)
             dataset = dataset.fillna(dataset.mean())
 
-            # Visualisasi distribusi Potability
-            st.write("### Mengatasi Outliers")
+            # Outliers
             for col in dataset.columns:
                 if dataset[col].dtype in ['int64', 'float64']:  # Hanya untuk kolom numerik
                     q1 = dataset[col].quantile(0.25)
@@ -61,9 +60,6 @@ def main():
                     # Ganti outliers dengan nilai rata-rata
                     mean_value = dataset[col].mean()
                     dataset[col] = dataset[col].apply(lambda x: mean_value if x < lower_bound or x > upper_bound else x)
-
-            st.write("### Data Setelah Penanganan Outliers")
-            st.write(dataset.head())
     
             # Visualisasi Distribusi Potability Sebelum Resampling
             st.write("### Distribusi Potability Sebelum Resampling")
@@ -74,7 +70,7 @@ def main():
             plt.ylabel("Jumlah")
             st.pyplot(plt)
     
-            # Resampling untuk keseimbangan kelas
+            # Resampling
             stratified_sample = dataset.groupby('Potability', group_keys=False).apply(lambda x: x.sample(2, random_state=1).reset_index(drop=True))
     
             # Visualisasi Distribusi Potability Setelah Resampling
