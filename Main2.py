@@ -90,7 +90,7 @@ def main():
             st.pyplot(plt)
             
             #Visualisasi Histogram untuk setiap fitur
-            st.subheader("Distribusi Histogram untuk Setiap Fitur")
+            st.subheader("Distribusi Histogram Plot")
             features = ['ph', 'Hardness', 'Solids', 'Chloramines', 'Sulfate', 'Conductivity', 'Organic_carbon', 'Trihalomethanes', 'Turbidity']
 
             plt.figure(figsize=(15, 12))
