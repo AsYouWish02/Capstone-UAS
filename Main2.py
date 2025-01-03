@@ -49,10 +49,39 @@ def main():
             dataset = dataset.fillna(dataset.mean())
 
             # Visualisasi distribusi Potability
-            st.subheader("Distribusi Potability")
+           st.write("### Mengatasi Outliers")
+            for col in dataset.columns:
+                if dataset[col].dtype in ['int64', 'float64']:  # Hanya untuk kolom numerik
+                    q1 = dataset[col].quantile(0.25)
+                    q3 = dataset[col].quantile(0.75)
+                    iqr = q3 - q1
+                    lower_bound = q1 - (1.5 * iqr)
+                    upper_bound = q3 + (1.5 * iqr)
+
+                    # Ganti outliers dengan nilai rata-rata
+                    mean_value = dataset[col].mean()
+                    dataset[col] = dataset[col].apply(lambda x: mean_value if x < lower_bound or x > upper_bound else x)
+
+            st.write("### Data Setelah Penanganan Outliers")
+            st.write(dataset.head())
+    
+            # Visualisasi Distribusi Potability Sebelum Resampling
+            st.write("### Distribusi Potability Sebelum Resampling")
             plt.figure(figsize=(6, 4))
             sns.countplot(data=dataset, x='Potability')
-            plt.title("Distribusi Data Kualitas Air")
+            plt.title("Distribusi Data Kualitas Air Sebelum Resampling")
+            plt.xlabel("Potability")
+            plt.ylabel("Jumlah")
+            st.pyplot(plt)
+    
+            # Resampling untuk keseimbangan kelas
+            stratified_sample = dataset.groupby('Potability', group_keys=False).apply(lambda x: x.sample(2, random_state=1).reset_index(drop=True))
+    
+            # Visualisasi Distribusi Potability Setelah Resampling
+            st.write("### Distribusi Potability Setelah Resampling")
+            plt.figure(figsize=(6, 4))
+            sns.countplot(data=stratified_sample, x='Potability')
+            plt.title("Distribusi Data Kualitas Air Setelah Resampling")
             plt.xlabel("Potability")
             plt.ylabel("Jumlah")
             st.pyplot(plt)
